@@ -9,5 +9,5 @@ module.exports = function(app) {
     // Routing root catchall (this should respond with angular frontend)
     app.all('/', (req, res) => {
         res.send('Its working!');
-    })
-}
+    });
+};

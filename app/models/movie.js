@@ -10,7 +10,7 @@ const movieSchema = new Schema({
     description: {
         type: String
     }
-    //TODO: Slices collection
+    // TODO: Slices collection
 });
 
 const Movie = mongoose.model('movie', movieSchema);
