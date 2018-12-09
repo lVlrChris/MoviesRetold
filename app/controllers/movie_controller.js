@@ -52,10 +52,10 @@ module.exports = {
     },
 
     delete(req, res, next) {
-        //Find movie
+        // Find movie
         Movie.findById(req.params.movieId)
             .then((result) => {
-                //Delete found movie
+                // Delete found movie
                 result.delete()
                     .then(() => {
                         res.send('Movie deleted');
