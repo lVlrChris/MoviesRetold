@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "set NODE_ENV=production&& node server.js",
-    "start:local": "set NODE_ENV=test&& nodemon server.js",
+    "start:test": "set NODE_ENV=tes&& nodemon server.js",
+    "start:local": "set NODE_ENV=local&& nodemon server.js",
+    "debug:express": "set DEBUG=express:* & node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -24,6 +26,7 @@
     "body-parser": "^1.18.3",
     "core-js": "^2.5.4",
     "express": "^4.16.4",
+    "joi": "^14.3.0",
     "mongoose": "^5.3.14",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
