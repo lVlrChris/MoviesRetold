@@ -1,0 +1,16 @@
+{
+    "extends": "standard",
+    "env": {
+        "node": true,
+        "mocha": true,
+        "mongo": true
+    },
+    "rules": {
+        "indent": ["error", 4],
+        "semi": ["error", "always"],
+        "space-before-function-paren": ["error", "never"],
+        "eol-last": 1,
+        "spaced-comment": 1,
+        "no-unused-vars": 1
+    }
+}
