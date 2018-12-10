@@ -1,0 +1,9 @@
+<mat-accordion multi="true" *ngIf="movies.length > 0">
+  <mat-expansion-panel *ngFor="let movie of movies">
+    <mat-expansion-panel-header>
+      {{ movie.title }}
+    </mat-expansion-panel-header>
+    <p>{{ movie.content }}</p>
+  </mat-expansion-panel>
+</mat-accordion>
+<p class="info-text mat-body-1" *ngIf="movies.length === 0">No movies added</p>
