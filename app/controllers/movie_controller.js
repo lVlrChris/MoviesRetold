@@ -21,7 +21,9 @@ module.exports = {
 
         const movie = new Movie({
             title: req.body.title,
-            description: req.body.description
+            description: req.body.description,
+            duration: req.body.duration,
+            sliceDuration: req.body.sliceDuration
         });
 
         // Save and respond

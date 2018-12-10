@@ -1,6 +1,6 @@
 const expressJwt = require('express-jwt');
 const config = require('../config');
-const { User } = require('../models/user');
+// const { User } = require('../models/user');
 
 function jwt() {
     const { secret } = config;
