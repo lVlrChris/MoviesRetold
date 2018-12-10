@@ -1,23 +1,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const jwt = require('./app/helpers/jwt');
 
 const app = express();
 
 // Load configurations
-const prodConfig = require('./app/config/production');
-const devConfig = require('./app/config/development');
-const testConfig = require('./app/config/test');
+const config = require('./app/config');
 app.use(bodyParser.json());
 
 let connection;
 // Connect database
 if (process.env.NODE_ENV === 'production') {
-    connection = mongoose.connect(prodConfig.dbUrl, { useNewUrlParser: true });
+    connection = mongoose.connect(config.dbUrl, { useNewUrlParser: true });
 } else if (process.env.NODE_ENV === 'test') {
-    connection = mongoose.connect(testConfig.dbUrl, { useNewUrlParser: true });
+    connection = mongoose.connect(config.dbUrlTest, { useNewUrlParser: true });
 } else {
-    connection = mongoose.connect(devConfig.dbUrl, { useNewUrlParser: true });
+    connection = mongoose.connect(config.dbUrlLocal, { useNewUrlParser: true });
 }
 
 connection.then(() => console.log('Connected to database.'))
@@ -25,6 +24,9 @@ connection.then(() => console.log('Connected to database.'))
         console.log('Unable to connect to database.');
         console.log(err);
     });
+
+// Setup authentication
+app.use(jwt());
 
 // Setup routing
 require('./app/routes/setup')(app);
