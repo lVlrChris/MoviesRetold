@@ -50,5 +50,14 @@ function validateMovie(movie) {
     return Joi.validate(movie, schema);
 }
 
+function validateMovieUpdate(movie) {
+    const schema = {
+        title: Joi.string().required(),
+        description: Joi.string()
+    };
+    return Joi.validate(movie, schema);
+}
+
 module.exports.Movie = Movie;
 module.exports.validate = validateMovie;
+module.exports.validateUpdate = validateMovieUpdate;

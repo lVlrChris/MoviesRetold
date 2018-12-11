@@ -1,4 +1,4 @@
-const { Movie, validate } = require('../models/movie');
+const { Movie, validate, validateUpdate } = require('../models/movie');
 
 module.exports = {
     getAll(req, res, next) {
@@ -34,7 +34,7 @@ module.exports = {
 
     update(req, res, next) {
         // Validate input
-        const { error } = validate(req.body);
+        const { error } = validateUpdate(req.body);
         if (error) return res.status(400).send(error.details[0].message);
 
         // Check if movie exists
