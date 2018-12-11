@@ -2,11 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const jwt = require('./app/helpers/jwt');
+const cors = require('cors');
 
 const app = express();
 
 // Load configurations
 const config = require('./app/config');
+app.use(cors());
 app.use(bodyParser.json());
 
 let connection;
@@ -26,7 +28,7 @@ connection.then(() => console.log('Connected to database.'))
     });
 
 // Setup authentication
-app.use(jwt());
+//app.use(jwt());
 
 // Setup routing
 require('./app/routes/setup')(app);

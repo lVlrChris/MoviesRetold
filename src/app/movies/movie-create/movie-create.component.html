@@ -1,11 +1,11 @@
 <mat-card>
   <form (submit)="onCreateMovie(movieForm)" #movieForm="ngForm">
     <mat-form-field>
-      <input matInput type="text" name="title" ngModel required #title="ngModel"/>
+      <input matInput type="text" name="title" ngModel required #title="ngModel" placeholder="Movie Title"/>
       <mat-error *ngIf="title.invalid">Movie title is required.</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <textarea matInput rows="6" name="description" ngmodel></textarea>
+      <textarea matInput rows="6" name="description" ngmodel placeholder="Movie Description"></textarea>
     </mat-form-field>
     <button mat-raised-button color="primary" type="submit">
       Save Movie

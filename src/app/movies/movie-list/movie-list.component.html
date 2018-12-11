@@ -3,7 +3,12 @@
     <mat-expansion-panel-header>
       {{ movie.title }}
     </mat-expansion-panel-header>
-    <p>{{ movie.content }}</p>
+    <p>{{ movie.id }}</p>
+    <p>{{ movie.description }}</p>
+    <p>{{ movie.duration }}</p>
+    <p>{{ movie.sliceDuration }}</p>
+    <p *ngFor="let slice of movie.slices">{{ slice._id }}</p>
+    <button mat-button color="warn" (click)="onDelete(movie.id)">DELETE</button>
   </mat-expansion-panel>
 </mat-accordion>
 <p class="info-text mat-body-1" *ngIf="movies.length === 0">No movies added</p>

@@ -22,12 +22,16 @@ export class MovieCreateComponent implements OnInit {
     }
 
     const movie: Movie = {
+      id: undefined,
       title: form.value.title,
       description: form.value.description,
       duration: 10,
-      sliceDuration: 2
+      sliceDuration: 2,
+      slices: undefined
     };
 
     this.movieService.addMovie(movie);
+
+    form.resetForm();
   }
 }

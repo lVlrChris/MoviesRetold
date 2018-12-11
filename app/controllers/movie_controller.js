@@ -27,8 +27,8 @@ module.exports = {
         });
 
         // Save and respond
-        movie.save().then(() => {
-            res.send(movie);
+        movie.save().then((savedMovie) => {
+            res.send(savedMovie);
         }).catch(next);
     },
 
@@ -46,10 +46,10 @@ module.exports = {
 
                 // Save updated movie
                 result.save().then((updated) => {
-                    res.send(result);
+                    res.send(updated);
                 }).catch(next);
             }).catch(() => {
-                res.status(404).send(`Movie with id: ${req.params.movieId} not found`);
+                res.status(404).json({ message: `Movie with id: ${req.params.movieId} not found` });
             });
     },
 
@@ -60,10 +60,10 @@ module.exports = {
                 // Delete found movie
                 result.delete()
                     .then(() => {
-                        res.send('Movie deleted');
+                        res.send({ message: `Movie with id: ${req.params.movieId} deleted` });
                     }).catch(next);
             }).catch(() => {
-                res.status(404).send(`Movie with id: ${req.params.movieId} not found`);
+                res.status(404).json({ message: `Movie with id: ${req.params.movieId} not found` });
             });
     }
 };
