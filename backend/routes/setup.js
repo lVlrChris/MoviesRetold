@@ -25,9 +25,9 @@ module.exports = function(app) {
         // res.sendFile(path.resolve('dist/MoviesRetold/index.html'));
 
         if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
-            res.sendFile(path.resolve(`dist/MoviesRetold/${req.url}`));
+            res.sendFile(path.resolve(`dist/${req.url}`));
           } else {
-            res.sendFile(path.resolve('dist/MoviesRetold/index.html'));
+            res.sendFile(path.resolve('dist/index.html'));
           }
     });
 
