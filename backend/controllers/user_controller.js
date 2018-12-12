@@ -11,7 +11,9 @@ module.exports = {
                     // Valid password
                     try {
                         const token = jwt.sign({ email: result.email, userId: result._id }, config.secret, { expiresIn: '1h' });
-                        return res.status(200).json({ message: 'Authorized', token: token, expiresIn: 3600 });
+                        result.hash = undefined;
+
+                        return res.status(200).json({ message: 'Authorized', token: token, expiresIn: 3600, user: result });
                     } catch (error) {
                         next(error);
                     }
@@ -67,7 +69,7 @@ module.exports = {
 
     getById(req, res, next) {
         User.findById(req.params.userId).select('-hash').then((result) => {
-            res.send(result);
+            res.status(200).json({ message: 'User fetched successfully', user: result });
         }).catch(next);
     },
 

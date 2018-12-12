@@ -5,6 +5,7 @@ import { PageEvent } from '@angular/material';
 import { Movie } from '../movie.model';
 import { MovieService } from 'src/app/movies/movie.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { User } from 'src/app/auth/user.model';
 
 @Component({
   selector: 'app-movie-list',
@@ -23,6 +24,7 @@ export class MovieListComponent implements OnInit, OnDestroy {
   movies: Movie[] = [];
   isLoading = false;
   userIsAuth = false;
+  user: User;
   totalMovies = 0;
   moviesPerPage = 4;
   currentPage = 1;
@@ -35,10 +37,12 @@ export class MovieListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.movieService.getMovies(this.moviesPerPage, this.currentPage);
     this.isLoading = true;
+    this.user = this.authService.getUser();
     this.movieSub = this.movieService.getMovieUpdateListener()
       .subscribe((movieData: { movies: Movie[], movieCount: number }) => {
         this.isLoading = false;
         this.movies = movieData.movies;
+        this.user = this.authService.getUser();
         this.totalMovies = movieData.movieCount;
       });
 
@@ -46,6 +50,7 @@ export class MovieListComponent implements OnInit, OnDestroy {
     this.authStatusSub = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
         this.userIsAuth = isAuthenticated;
+        this.user = this.authService.getUser();
       });
   }
 

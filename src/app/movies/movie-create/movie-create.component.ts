@@ -45,7 +45,8 @@ export class MovieCreateComponent implements OnInit {
             description: movieData.description,
             duration: movieData.duration,
             sliceDuration: movieData.sliceDuration,
-            slices: movieData.slices
+            slices: movieData.slices,
+            creator: movieData.creator
           };
           // Fill form with data
           this.form.setValue({ title: this.movie.title, description: this.movie.description});
@@ -78,7 +79,8 @@ export class MovieCreateComponent implements OnInit {
         description: '' + this.form.value.description,
         duration: this.form.value.duration,
         sliceDuration: this.form.value.sliceDuration,
-        slices: undefined
+        slices: undefined,
+        creator: undefined
       };
 
       this.movieService.addMovie(movie);
@@ -91,7 +93,8 @@ export class MovieCreateComponent implements OnInit {
         description: this.form.value.description,
         duration: undefined,
         sliceDuration: undefined,
-        slices: undefined
+        slices: undefined,
+        creator: undefined
       };
 
       this.movieService.updateMovie(this.movieId, movie);

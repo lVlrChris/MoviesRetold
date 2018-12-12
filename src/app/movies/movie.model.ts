@@ -1,4 +1,5 @@
 import { Slice } from './slice.model';
+import { User } from '../auth/user.model';
 
 export interface Movie {
   id: String;
@@ -7,4 +8,5 @@ export interface Movie {
   duration: Number;
   sliceDuration: Number;
   slices: Slice[];
+  creator: string;
 }

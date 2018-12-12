@@ -23,11 +23,17 @@ const movieSchema = new Schema({
         type: Number,
         required: true
     },
-    slices: [sliceSchema]
+    slices: [sliceSchema],
+    creator: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+        required: true
+    }
 });
 
 movieSchema.plugin(uniqueValidator);
 
+// Generate slices when creating a new movie
 movieSchema.pre('save', function(next) {
     if (this.isNew) {
         for (let i = 0; i < this.duration; i += this.sliceDuration) {

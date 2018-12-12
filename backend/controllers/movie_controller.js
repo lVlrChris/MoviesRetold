@@ -1,4 +1,5 @@
 const { Movie, validate, validateUpdate } = require('../models/movie');
+const { User } = require('../models/user');
 
 module.exports = {
     getAll(req, res, next) {
@@ -43,12 +44,16 @@ module.exports = {
             title: req.body.title,
             description: req.body.description,
             duration: req.body.duration,
-            sliceDuration: req.body.sliceDuration
+            sliceDuration: req.body.sliceDuration,
+            creator: req.userData.userId
         });
 
         // Save and respond
         movie.save().then((savedMovie) => {
-            res.send(savedMovie);
+            res.status(201).json({
+                message: 'Movie created successfully',
+                movie: savedMovie
+            });
         }).catch(next);
     },
 
@@ -58,7 +63,7 @@ module.exports = {
         if (error) return res.status(400).send(error.details[0].message);
 
         // Check if movie exists
-        Movie.findById(req.params.movieId)
+        Movie.findOne({ _id: req.params.movieId, creator: req.userData.userId })
             .then((result) => {
                 // Movie found
                 result.title = req.body.title;
@@ -66,16 +71,20 @@ module.exports = {
 
                 // Save updated movie
                 result.save().then((updated) => {
-                    res.send(updated);
+                    res.status(200).json({
+                        message: 'Movie updated successfully.',
+                        movie: updated
+                    });
                 }).catch(next);
-            }).catch(() => {
-                res.status(404).json({ message: `Movie with id: ${req.params.movieId} not found` });
+            }).catch((err) => {
+                console.log(err);
+                res.status(404).json({ message: `Movie with id: ${req.params.movieId} or creator: ${req.userData.userId} not found/authorized` });
             });
     },
 
     delete(req, res, next) {
         // Find movie
-        Movie.findById(req.params.movieId)
+        Movie.findOne({ _id: req.params.movieId, creator: req.userData.userId })
             .then((result) => {
                 // Delete found movie
                 result.delete()
@@ -83,7 +92,7 @@ module.exports = {
                         res.send({ message: `Movie with id: ${req.params.movieId} deleted` });
                     }).catch(next);
             }).catch(() => {
-                res.status(404).json({ message: `Movie with id: ${req.params.movieId} not found` });
+                res.status(404).json({ message: `Movie with id: ${req.params.movieId} or creator: ${req.userData.userId} not found/authorized` });
             });
     }
 };

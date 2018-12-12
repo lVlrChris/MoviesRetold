@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { Movie } from './movie.model';
-import { post } from 'selenium-webdriver/http';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -36,12 +35,14 @@ export class MovieService {
             description: movie.description,
             duration: movie.duration,
             sliceDuration: movie.sliceDuration,
-            slices: movie.slices
+            slices: movie.slices,
+            creator: movie.creator
           };
         }), maxMovies: data.maxMovies };
       }))
       .subscribe((response) => {
         this.movies = response.movies;
+        console.log(this.movies);
         this.moviesUpdated.next({ movies: [...this.movies], movieCount: response.maxMovies });
       });
   }
@@ -70,7 +71,8 @@ export class MovieService {
           description: data.description,
           duration: data.duration,
           sliceDuration: data.sliceDuration,
-          slices: data.slices
+          slices: data.slices,
+          creator: data.creator
         };
       }))
       .subscribe((response) => {
