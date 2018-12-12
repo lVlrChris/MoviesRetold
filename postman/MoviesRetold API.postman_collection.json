@@ -6,196 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "Get All Movies",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YzBkZTEwMTBjZTYzMzFiNzA4MzBmODYiLCJpYXQiOjE1NDQ0MTM0NDV9.IM2Ykys_VFAyaYbGST8Bm8x4L28ByRA-m079X59ln1M",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "{{URL-Prefix}}/api/v1/movies?pagesize=2&page=1",
-					"host": [
-						"{{URL-Prefix}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"movies"
-					],
-					"query": [
-						{
-							"key": "pagesize",
-							"value": "2"
-						},
-						{
-							"key": "page",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Movie By Id",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "{{URL-Prefix}}/api/v1/movies/5c0d977e2c427a1c04c9a66e",
-					"host": [
-						"{{URL-Prefix}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"movies",
-						"5c0d977e2c427a1c04c9a66e"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create Movie",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YzBkZTEwMTBjZTYzMzFiNzA4MzBmODYiLCJpYXQiOjE1NDQ0MTM0NDV9.IM2Ykys_VFAyaYbGST8Bm8x4L28ByRA-m079X59ln1M",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"title\": \"Movietitle\",\n\t\"description\": \"This is a movie\",\n\t\"duration\": 11,\n\t\"sliceDuration\": 2\n}"
-				},
-				"url": {
-					"raw": "{{URL-Prefix}}/api/v1/movies/",
-					"host": [
-						"{{URL-Prefix}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"movies",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update Movie",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"title\": \"Movietitle9a\",\n\t\"description\": \"This is a movie\",\n\t\"duration\": 11,\n\t\"sliceDuration\": 2\n}"
-				},
-				"url": {
-					"raw": "{{URL-Prefix}}/api/v1/movies/5c0f14fecda29809f80a6900",
-					"host": [
-						"{{URL-Prefix}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"movies",
-						"5c0f14fecda29809f80a6900"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Movie",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"title\": \"Movietitle1-a\",\n\t\"description\": \"This is a movie\"\n}"
-				},
-				"url": {
-					"raw": "{{URL-Prefix}}/api/v1/movies/5c0d979d2c427a1c04c9a66f",
-					"host": [
-						"{{URL-Prefix}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"movies",
-						"5c0d979d2c427a1c04c9a66f"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Register User",
 			"request": {
 				"method": "POST",
@@ -258,6 +68,226 @@
 			"response": []
 		},
 		{
+			"name": "Create Movie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ldzFAdXNlci5jb20iLCJ1c2VySWQiOiI1YzExOGQzY2E5NThiYjAwMTY3NjljNjQiLCJpYXQiOjE1NDQ2NTQyNzQsImV4cCI6MTU0NDY1Nzg3NH0.olIIoTB-_4GGNJLAFolsz16GNfoIZo5W38KLIG3ZjQU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Movietitle1\",\n\t\"description\": \"This is a movie\",\n\t\"duration\": 11,\n\t\"sliceDuration\": 2\n}"
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/movies/",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Movies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ldzFAdXNlci5jb20iLCJ1c2VySWQiOiI1YzExOGQzY2E5NThiYjAwMTY3NjljNjQiLCJpYXQiOjE1NDQ2NTQyNzQsImV4cCI6MTU0NDY1Nzg3NH0.olIIoTB-_4GGNJLAFolsz16GNfoIZo5W38KLIG3ZjQU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/movies?pagesize=2&page=1",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies"
+					],
+					"query": [
+						{
+							"key": "pagesize",
+							"value": "2"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Movie By Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ldzFAdXNlci5jb20iLCJ1c2VySWQiOiI1YzExOGQzY2E5NThiYjAwMTY3NjljNjQiLCJpYXQiOjE1NDQ2NTQyNzQsImV4cCI6MTU0NDY1Nzg3NH0.olIIoTB-_4GGNJLAFolsz16GNfoIZo5W38KLIG3ZjQU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/movies/5c10d024908ae200168c2c8d",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"5c10d024908ae200168c2c8d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Movie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ldzFAdXNlci5jb20iLCJ1c2VySWQiOiI1YzExOGQzY2E5NThiYjAwMTY3NjljNjQiLCJpYXQiOjE1NDQ2NTQyNzQsImV4cCI6MTU0NDY1Nzg3NH0.olIIoTB-_4GGNJLAFolsz16GNfoIZo5W38KLIG3ZjQU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Movietitle1a\",\n\t\"description\": \"This is an edited movie description\"\n}"
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/movies/5c118e11a958bb0016769c65",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"5c118e11a958bb0016769c65"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Movie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ldzFAdXNlci5jb20iLCJ1c2VySWQiOiI1YzExOGQzY2E5NThiYjAwMTY3NjljNjQiLCJpYXQiOjE1NDQ2NTQyNzQsImV4cCI6MTU0NDY1Nzg3NH0.olIIoTB-_4GGNJLAFolsz16GNfoIZo5W38KLIG3ZjQU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/movies/5c118e11a958bb0016769c65",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"5c118e11a958bb0016769c65"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get All Users",
 			"request": {
 				"auth": {
@@ -265,7 +295,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YzBkZTEwMTBjZTYzMzFiNzA4MzBmODYiLCJpYXQiOjE1NDQ0MTM0NDV9.IM2Ykys_VFAyaYbGST8Bm8x4L28ByRA-m079X59ln1M",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ldzFAdXNlci5jb20iLCJ1c2VySWQiOiI1YzExOGQzY2E5NThiYjAwMTY3NjljNjQiLCJpYXQiOjE1NDQ2NTQyNzQsImV4cCI6MTU0NDY1Nzg3NH0.olIIoTB-_4GGNJLAFolsz16GNfoIZo5W38KLIG3ZjQU",
 							"type": "string"
 						}
 					]
@@ -299,7 +329,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YzBkZDNlOTU5ZTE3YzA5MzQ4NGVmOGUiLCJpYXQiOjE1NDQ0MTAxNTV9.do7pRB4SvHosmAYwx1WNAT6XsujDHrXdhluqqX1k9Oo",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ldzFAdXNlci5jb20iLCJ1c2VySWQiOiI1YzExOGQzY2E5NThiYjAwMTY3NjljNjQiLCJpYXQiOjE1NDQ2NTQyNzQsImV4cCI6MTU0NDY1Nzg3NH0.olIIoTB-_4GGNJLAFolsz16GNfoIZo5W38KLIG3ZjQU",
 							"type": "string"
 						}
 					]
@@ -311,7 +341,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{URL-Prefix}}/api/v1/users/5c0dd3e959e17c093484ef8e",
+					"raw": "{{URL-Prefix}}/api/v1/users/5c10cfdd908ae200168c2c8c",
 					"host": [
 						"{{URL-Prefix}}"
 					],
@@ -319,51 +349,7 @@
 						"api",
 						"v1",
 						"users",
-						"5c0dd3e959e17c093484ef8e"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update User",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YzBkZDNlOTU5ZTE3YzA5MzQ4NGVmOGUiLCJpYXQiOjE1NDQ0MTAxNTV9.do7pRB4SvHosmAYwx1WNAT6XsujDHrXdhluqqX1k9Oo",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"email\": \"new1@user.com\",\n\t\"password\": \"testing123\",\n\t\"firstName\": \"Chris\",\n\t\"lastName\": \"Boer\"\n}"
-				},
-				"url": {
-					"raw": "{{URL-Prefix}}/api/v1/users/5c0dd3e959e17c093484ef8e",
-					"host": [
-						"{{URL-Prefix}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"users",
-						"5c0dd3e959e17c093484ef8e"
+						"5c10cfdd908ae200168c2c8c"
 					]
 				}
 			},
@@ -564,7 +550,7 @@
 	],
 	"variable": [
 		{
-			"id": "2d699bd2-037c-4483-b4cb-47f0d18b3149",
+			"id": "527210d7-c175-4859-84c9-b98d69d1ff6d",
 			"key": "URL-Prefix",
 			"value": "localhost:3000",
 			"type": "string"
