@@ -1,5 +1,6 @@
 <mat-card>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <div *ngIf="!isLoading">
   <mat-card-header>
     <mat-card-title>{{ movie.title }}</mat-card-title>
     <mat-card-subtitle>Submitted by: {{ userFullName }}</mat-card-subtitle>
@@ -29,4 +30,5 @@
       <a mat-button color="primary" [routerLink]="['/edit', movie.id]">EDIT</a>
       <button mat-button color="warn" (click)="onDelete(movie.id)">DELETE</button>
     </mat-card-actions>
+  </div>
 </mat-card>
