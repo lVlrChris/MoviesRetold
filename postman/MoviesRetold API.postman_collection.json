@@ -1,0 +1,573 @@
+{
+	"info": {
+		"_postman_id": "f4a08893-5011-4edc-a117-3a03ef6ee402",
+		"name": "MoviesRetold API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Movies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YzBkZTEwMTBjZTYzMzFiNzA4MzBmODYiLCJpYXQiOjE1NDQ0MTM0NDV9.IM2Ykys_VFAyaYbGST8Bm8x4L28ByRA-m079X59ln1M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/movies?pagesize=2&page=1",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies"
+					],
+					"query": [
+						{
+							"key": "pagesize",
+							"value": "2"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Movie By Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/movies/5c0d977e2c427a1c04c9a66e",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"5c0d977e2c427a1c04c9a66e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Movie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YzBkZTEwMTBjZTYzMzFiNzA4MzBmODYiLCJpYXQiOjE1NDQ0MTM0NDV9.IM2Ykys_VFAyaYbGST8Bm8x4L28ByRA-m079X59ln1M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Movietitle\",\n\t\"description\": \"This is a movie\",\n\t\"duration\": 11,\n\t\"sliceDuration\": 2\n}"
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/movies/",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Movie",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Movietitle9a\",\n\t\"description\": \"This is a movie\",\n\t\"duration\": 11,\n\t\"sliceDuration\": 2\n}"
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/movies/5c0f14fecda29809f80a6900",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"5c0f14fecda29809f80a6900"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Movie",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Movietitle1-a\",\n\t\"description\": \"This is a movie\"\n}"
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/movies/5c0d979d2c427a1c04c9a66f",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"5c0d979d2c427a1c04c9a66f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"new1@user.com\",\n\t\"password\": \"testing123\",\n\t\"firstName\": \"Chris\",\n\t\"lastName\": \"Boer\"\n}"
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/users/register",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authenticate User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"new1@user.com\",\n\t\"password\": \"testing123\"\n}"
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/users/authenticate",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YzBkZTEwMTBjZTYzMzFiNzA4MzBmODYiLCJpYXQiOjE1NDQ0MTM0NDV9.IM2Ykys_VFAyaYbGST8Bm8x4L28ByRA-m079X59ln1M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/users/",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YzBkZDNlOTU5ZTE3YzA5MzQ4NGVmOGUiLCJpYXQiOjE1NDQ0MTAxNTV9.do7pRB4SvHosmAYwx1WNAT6XsujDHrXdhluqqX1k9Oo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/users/5c0dd3e959e17c093484ef8e",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"5c0dd3e959e17c093484ef8e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YzBkZDNlOTU5ZTE3YzA5MzQ4NGVmOGUiLCJpYXQiOjE1NDQ0MTAxNTV9.do7pRB4SvHosmAYwx1WNAT6XsujDHrXdhluqqX1k9Oo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"new1@user.com\",\n\t\"password\": \"testing123\",\n\t\"firstName\": \"Chris\",\n\t\"lastName\": \"Boer\"\n}"
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/users/5c0dd3e959e17c093484ef8e",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"5c0dd3e959e17c093484ef8e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YzBkZDNlOTU5ZTE3YzA5MzQ4NGVmOGUiLCJpYXQiOjE1NDQ0MTAxNTV9.do7pRB4SvHosmAYwx1WNAT6XsujDHrXdhluqqX1k9Oo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"new1a@user.com\",\n\t\"firstName\": \"Chris\",\n\t\"lastName\": \"Boer\"\n}"
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/users/5c0de1010ce6331b70830f85",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"5c0de1010ce6331b70830f85"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YzBkZDNlOTU5ZTE3YzA5MzQ4NGVmOGUiLCJpYXQiOjE1NDQ0MTAxNTV9.do7pRB4SvHosmAYwx1WNAT6XsujDHrXdhluqqX1k9Oo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/users/5c0dd3e959e17c093484ef8e",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"5c0dd3e959e17c093484ef8e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Claim Slice",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YzBkZTEwMTBjZTYzMzFiNzA4MzBmODYiLCJpYXQiOjE1NDQ0MTM0NDV9.IM2Ykys_VFAyaYbGST8Bm8x4L28ByRA-m079X59ln1M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/movies/5c0debb318339a1998dc579a/slices/5c0debb318339a1998dc579b/claim",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"5c0debb318339a1998dc579a",
+						"slices",
+						"5c0debb318339a1998dc579b",
+						"claim"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unclaim Slice",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YzBkZTEwMTBjZTYzMzFiNzA4MzBmODYiLCJpYXQiOjE1NDQ0MTM0NDV9.IM2Ykys_VFAyaYbGST8Bm8x4L28ByRA-m079X59ln1M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{URL-Prefix}}/api/v1/movies/5c0debb318339a1998dc579a/slices/5c0debb318339a1998dc579b/claim",
+					"host": [
+						"{{URL-Prefix}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"5c0debb318339a1998dc579a",
+						"slices",
+						"5c0debb318339a1998dc579b",
+						"claim"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "bd4fc505-645f-4fd9-b4e2-1c1ce073e6d2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1ece43c9-c85f-49d5-a3d5-9d34749efee0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "2d699bd2-037c-4483-b4cb-47f0d18b3149",
+			"key": "URL-Prefix",
+			"value": "localhost:3000",
+			"type": "string"
+		}
+	]
+}

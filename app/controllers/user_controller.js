@@ -9,8 +9,8 @@ module.exports = {
             .then((result) => {
                 if (bcrypt.compareSync(req.body.password, result.hash)) {
                     // Valid password
-                    const token = jwt.sign({ email: result.email, userId: result._id }, config.secret, { expiresIn: '2h' });
-                    return res.status(200).json({ message: 'Authorized', token: token });
+                    const token = jwt.sign({ email: result.email, userId: result._id }, config.secret, { expiresIn: '1h' });
+                    return res.status(200).json({ message: 'Authorized', token: token, expiresIn: 3600 });
                 } else {
                     // Invalid password
                     return res.status(401).json({ message: 'Unauthorized.' });
