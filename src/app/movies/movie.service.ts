@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import { Movie } from './movie.model';
 import { post } from 'selenium-webdriver/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class MovieService {
 
   private movies: Movie[] = [];
   private moviesUpdated = new Subject<{ movies: Movie[], movieCount: number }>();
+  apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -25,7 +27,7 @@ export class MovieService {
     const queryParams = `?pagesize=${moviesPerPage}&page=${currentPage}`;
 
     this.http
-      .get<{ message: string, movies: any, maxMovies: number }>('http://localhost:3000/api/v1/movies' + queryParams)
+      .get<{ message: string, movies: any, maxMovies: number }>(`${this.apiUrl}api/v1/movies` + queryParams)
       .pipe(map((data) => {
         return { movies: data.movies.map(movie => {
           return {
@@ -45,11 +47,11 @@ export class MovieService {
   }
 
   getMovie(id: String) {
-    return this.http.get<any>('http://localhost:3000/api/v1/movies/' + id);
+    return this.http.get<any>(`${this.apiUrl}api/v1/movies/` + id);
   }
 
   addMovie(movie: Movie) {
-    this.http.post<any>('http://localhost:3000/api/v1/movies', movie)
+    this.http.post<any>(`${this.apiUrl}api/v1/movies`, movie)
       .subscribe((response) => {
         // movie.id = response.id;
         // movie.slices = response.slices;
@@ -60,7 +62,7 @@ export class MovieService {
   }
 
   updateMovie(movieId: String, movie: Movie) {
-    this.http.put<any>('http://localhost:3000/api/v1/movies/' + movieId, movie)
+    this.http.put<any>(`${this.apiUrl}api/v1/movies/` + movieId, movie)
       .pipe(map((data) => {
         return {
           id: data._id,
@@ -82,6 +84,6 @@ export class MovieService {
   }
 
   deleteMovie(movieId: String) {
-    return this.http.delete('http://localhost:3000/api/v1/movies/' + movieId);
+    return this.http.delete(`${this.apiUrl}api/v1/movies/` + movieId);
   }
 }
