@@ -9,14 +9,15 @@ module.exports = function(app) {
 
     app.use('/api/v1/movies', movieRouter);
     app.use('/api/v1/movies/:movieId/slices', function(req, res, next) {
-        //This will pass the threadId through the route
+        // This will pass the threadId through the route
         req.movieId = req.params.movieId;
         next();
     }, sliceRouter);
     app.use('/api/v1/users', userRouter);
 
-    
-    const allowedExt = ['.js', '.ico', '.css', '.png', '.jpg', '.woff2', '.woff', '.ttf', '.svg' ];
+    const allowedExt = ['.js', '.ico', '.css', '.sass', '.png', '.jpg', '.woff2', '.woff', '.ttf', '.svg'];
+    // app.use('/images', express.static(path.join(__dirname, 'dist/images')));
+    // app.use('/', express.static(path.join(__dirname, 'dist/')));
 
     // Routing root catch-all (this should respond with angular frontend)
     app.get('*', (req, res, next) => {
@@ -26,12 +27,10 @@ module.exports = function(app) {
 
         if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
             res.sendFile(path.resolve(`dist/${req.url}`));
-          } else {
+        } else {
             res.sendFile(path.resolve('dist/index.html'));
-          }
+        }
     });
-
-    
 
     // Catch-all error handler
     // app.use((err, req, res, next) => {
