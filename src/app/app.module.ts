@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import {
@@ -9,7 +9,8 @@ import {
   MatButtonModule,
   MatToolbarModule,
   MatExpansionModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatGridListModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -28,7 +29,7 @@ import { MovieCreateComponent } from './movies/movie-create/movie-create.compone
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatInputModule,
     MatCardModule,
@@ -36,6 +37,7 @@ import { MovieCreateComponent } from './movies/movie-create/movie-create.compone
     MatToolbarModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
+    MatGridListModule,
     HttpClientModule
   ],
   providers: [],
