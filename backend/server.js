@@ -1,13 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const jwt = require('./app/helpers/jwt');
+// const jwt = require('./helpers/jwt');
 const cors = require('cors');
 
 const app = express();
 
 // Load configurations
-const config = require('./app/config');
+const config = require('./config');
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -31,7 +31,7 @@ connection.then(() => console.log('Connected to database.'))
 // app.use(jwt());
 
 // Setup routing
-require('./app/routes/setup')(app);
+require('./routes/setup')(app);
 
 const server = app.listen(process.env.PORT || 3000, () => {
     const port = server.address().port;

@@ -1,0 +1,35 @@
+{
+  "name": "movies-retold",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "set NODE_ENV=production&& node server.js",
+    "start:test": "set NODE_ENV=tes&& nodemon server.js",
+    "start:local": "set NODE_ENV=local&& nodemon server.js",
+    "debug:express": "set DEBUG=express:* & node server.js"
+  },
+  "private": true,
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
+    "joi": "^14.3.0",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.3.14",
+    "mongoose-unique-validator": "^2.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.7"
+  },
+  "engines": {
+    "node": "10.x"
+  }
+}
