@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { PageEvent } from '@angular/material';
 
 import { Movie } from '../movie.model';
 import { MovieService } from 'src/app/movies/movie.service';
@@ -20,22 +21,38 @@ export class MovieListComponent implements OnInit, OnDestroy {
 
   movies: Movie[] = [];
   isLoading = false;
+  totalMovies = 0;
+  moviesPerPage = 4;
+  currentPage = 1;
+  pageSizeOptions = [ 2, 4, 8 ];
   private movieSub: Subscription;
+
 
   constructor(private movieService: MovieService) { }
 
   ngOnInit() {
-    this.movieService.getMovies();
+    this.movieService.getMovies(this.moviesPerPage, this.currentPage);
     this.isLoading = true;
     this.movieSub = this.movieService.getMovieUpdateListener()
-      .subscribe((movies: Movie[]) => {
+      .subscribe((movieData: { movies: Movie[], movieCount: number }) => {
         this.isLoading = false;
-        this.movies = movies;
+        this.movies = movieData.movies;
+        this.totalMovies = movieData.movieCount;
       });
   }
 
+  onChangedPage(pageData: PageEvent) {
+    this.isLoading = true;
+    this.currentPage = pageData.pageIndex + 1;
+    this.moviesPerPage = pageData.pageSize;
+    this.movieService.getMovies(this.moviesPerPage, this.currentPage);
+  }
+
   onDelete(movieId: String) {
-    this.movieService.deleteMovie(movieId);
+    this.isLoading = true;
+    this.movieService.deleteMovie(movieId).subscribe(() => {
+        this.movieService.getMovies(this.moviesPerPage, this.currentPage);
+      });
   }
 
   ngOnDestroy() {

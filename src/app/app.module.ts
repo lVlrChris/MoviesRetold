@@ -10,7 +10,8 @@ import {
   MatToolbarModule,
   MatExpansionModule,
   MatProgressSpinnerModule,
-  MatGridListModule
+  MatGridListModule,
+  MatPaginatorModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -38,6 +39,7 @@ import { MovieCreateComponent } from './movies/movie-create/movie-create.compone
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatGridListModule,
+    MatPaginatorModule,
     HttpClientModule
   ],
   providers: [],

@@ -3,8 +3,28 @@ const { Movie, validate, validateUpdate } = require('../models/movie');
 module.exports = {
     getAll(req, res, next) {
         // TODO: Sorting
-        Movie.find().then((result) => {
-            res.send(result);
+        // Gather pagination vars
+        const pageSize = +req.query.pagesize;
+        const currentPage = +req.query.page;
+        const movieQuery = Movie.find();
+        let fetchedMovies;
+
+        // Skip & Limit fetch if pagination is requested
+        if (pageSize && currentPage) {
+            movieQuery
+                .skip(pageSize * (currentPage - 1))
+                .limit(pageSize);
+        }
+
+        movieQuery.then((result) => {
+            fetchedMovies = result;
+            return Movie.count();
+        }).then((count) => {
+            res.status(200).json({
+                message: 'Movies fetched successfully',
+                movies: fetchedMovies,
+                maxMovies: count
+            });
         }).catch(next);
     },
 

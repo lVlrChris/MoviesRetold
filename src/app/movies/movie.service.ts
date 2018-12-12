@@ -13,7 +13,7 @@ import { post } from 'selenium-webdriver/http';
 export class MovieService {
 
   private movies: Movie[] = [];
-  private moviesUpdated = new Subject<Movie[]>();
+  private moviesUpdated = new Subject<{ movies: Movie[], movieCount: number }>();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -21,11 +21,13 @@ export class MovieService {
     return this.moviesUpdated.asObservable();
   }
 
-  getMovies() {
+  getMovies(moviesPerPage: number, currentPage: number) {
+    const queryParams = `?pagesize=${moviesPerPage}&page=${currentPage}`;
+
     this.http
-      .get<any>('http://localhost:3000/api/v1/movies')
+      .get<{ message: string, movies: any, maxMovies: number }>('http://localhost:3000/api/v1/movies' + queryParams)
       .pipe(map((data) => {
-        return data.map(movie => {
+        return { movies: data.movies.map(movie => {
           return {
             id: movie._id,
             title: movie.title,
@@ -34,11 +36,11 @@ export class MovieService {
             sliceDuration: movie.sliceDuration,
             slices: movie.slices
           };
-        });
+        }), maxMovies: data.maxMovies };
       }))
       .subscribe((response) => {
-        this.movies = response;
-        this.moviesUpdated.next([...this.movies]);
+        this.movies = response.movies;
+        this.moviesUpdated.next({ movies: [...this.movies], movieCount: response.maxMovies });
       });
   }
 
@@ -49,10 +51,10 @@ export class MovieService {
   addMovie(movie: Movie) {
     this.http.post<any>('http://localhost:3000/api/v1/movies', movie)
       .subscribe((response) => {
-        movie.id = response.id;
-        movie.slices = response.slices;
-        this.movies.push(movie);
-        this.moviesUpdated.next([...this.movies]);
+        // movie.id = response.id;
+        // movie.slices = response.slices;
+        // this.movies.push(movie);
+        // this.moviesUpdated.next([...this.movies]);
         this.router.navigate(['/']);
       });
   }
@@ -70,21 +72,16 @@ export class MovieService {
         };
       }))
       .subscribe((response) => {
-        const updatedMovies = [...this.movies];
-        const oldMovieIndex = updatedMovies.findIndex(m => m.id === movie.id);
-        updatedMovies[oldMovieIndex] = response;
-        this.movies = updatedMovies;
-        this.moviesUpdated.next([...this.movies]);
+        // const updatedMovies = [...this.movies];
+        // const oldMovieIndex = updatedMovies.findIndex(m => m.id === movie.id);
+        // updatedMovies[oldMovieIndex] = response;
+        // this.movies = updatedMovies;
+        // this.moviesUpdated.next([...this.movies]);
         this.router.navigate(['/']);
       });
   }
 
   deleteMovie(movieId: String) {
-    this.http.delete('http://localhost:3000/api/v1/movies/' + movieId)
-      .subscribe(() => {
-        const updatedMovies = this.movies.filter(movie => movie.id !== movieId);
-        this.movies = updatedMovies;
-        this.moviesUpdated.next([...this.movies]);
-      });
+    return this.http.delete('http://localhost:3000/api/v1/movies/' + movieId);
   }
 }
