@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Configure Angular serving
-var distDir = __dirname + "/dist/";
+const distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
 
 let connection;
