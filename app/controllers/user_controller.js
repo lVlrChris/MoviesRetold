@@ -8,8 +8,12 @@ module.exports = {
         User.findOne({ email: req.body.email })
             .then((result) => {
                 if (bcrypt.compareSync(req.body.password, result.hash)) {
-                    const token = jwt.sign({ sub: result.id }, config.secret);
-                    res.send({ token: token });
+                    // Valid password
+                    const token = jwt.sign({ email: result.email, userId: result._id }, config.secret, { expiresIn: '2h' });
+                    return res.status(200).json({ message: 'Authorized', token: token });
+                } else {
+                    // Invalid password
+                    return res.status(401).json({ message: 'Unauthorized.' });
                 }
             })
             .catch(() => {
@@ -39,9 +43,10 @@ module.exports = {
                     return res.status(400).json({ error: 'No password provided' });
                 }
 
-                user.save().then(() => {
-                    // TODO: Omit hash from response
-                    res.send(user);
+                user.save().then((savedUser) => {
+                    // Omit hash from result
+                    savedUser.hash = undefined;
+                    res.status(201).json({ message: 'User created.', result: savedUser });
                 }).catch(next);
             } else {
                 res.status(400).json({ error: `Email: ${req.body.email} is already taken.` });

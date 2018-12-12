@@ -28,7 +28,7 @@ connection.then(() => console.log('Connected to database.'))
     });
 
 // Setup authentication
-//app.use(jwt());
+// app.use(jwt());
 
 // Setup routing
 require('./app/routes/setup')(app);

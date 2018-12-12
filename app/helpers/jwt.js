@@ -7,7 +7,11 @@ function jwt() {
     return expressJwt({ secret }).unless({
         path: [
             '/api/v1/users/authenticate',
-            '/api/v1/users/register'
+            '/api/v1/users/register',
+            '/api/v1/movies',
+            { url: '/', methods: ['GET'] },
+            '/api/v1/movies',
+            { url: new RegExp('^/*'), methods: ['GET'] }
         ]
     });
 }

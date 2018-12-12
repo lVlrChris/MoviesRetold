@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
+const uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
 
 const sliceSchema = require('./slice');
@@ -24,6 +25,8 @@ const movieSchema = new Schema({
     },
     slices: [sliceSchema]
 });
+
+movieSchema.plugin(uniqueValidator);
 
 movieSchema.pre('save', function(next) {
     if (this.isNew) {
