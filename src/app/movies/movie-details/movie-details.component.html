@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <mat-card-header>
+    <mat-card-title>{{ movie.title }}</mat-card-title>
+    <mat-card-subtitle>Submitted by: {{ userFullName }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <h4>Description: </h4>
+    <p class="mat-body-1">{{ movie.description }}</p>
+
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let slice of movie.slices">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Slice title</mat-panel-title>
+          <mat-panel-description>slice description</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <p>Primary content</p>
+
+        <mat-action-row>
+          <button mat-button color="primary" (click)="onClaim(slice.id)">CLAIM</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+
+  <mat-card-actions *ngIf="userIsAuth && userId === movie.creator">
+      <a mat-button color="primary" [routerLink]="['/edit', movie.id]">EDIT</a>
+      <button mat-button color="warn" (click)="onDelete(movie.id)">DELETE</button>
+    </mat-card-actions>
+</mat-card>

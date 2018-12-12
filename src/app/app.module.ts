@@ -25,6 +25,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
+import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ErrorComponent } from './error/error.component';
     MovieCreateComponent,
     SignupComponent,
     LoginComponent,
-    ErrorComponent
+    ErrorComponent,
+    MovieDetailsComponent
   ],
   imports: [
     BrowserModule,

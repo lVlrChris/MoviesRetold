@@ -27,7 +27,7 @@ module.exports = {
 
             // Save and respond
             movie.save().then(() => {
-                res.send(movie);
+                res.status(200).json({ message: 'Slice successfully claimed', movie: movie });
             });
         }).catch(next);
     },
@@ -55,7 +55,7 @@ module.exports = {
 
             // Save and respond
             movie.save().then(() => {
-                res.send(movie);
+                res.status(200).json({ message: 'Slice successfully unclaimed', movie: movie });
             }).catch(next);
         }).catch(next);
     }

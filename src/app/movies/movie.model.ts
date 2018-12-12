@@ -2,11 +2,11 @@ import { Slice } from './slice.model';
 import { User } from '../auth/user.model';
 
 export interface Movie {
-  id: String;
-  title: String;
-  description: String;
-  duration: Number;
-  sliceDuration: Number;
+  id: string;
+  title: string;
+  description: string;
+  duration: number;
+  sliceDuration: number;
   slices: Slice[];
   creator: string;
 }

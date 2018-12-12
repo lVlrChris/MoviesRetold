@@ -87,4 +87,11 @@ export class MovieService {
   deleteMovie(movieId: String) {
     return this.http.delete(`${this.apiUrl}api/v1/movies/` + movieId);
   }
+
+  addClaim(movieId: string, sliceId: string) {
+    this.http.post<{ message: string, movie: any }>(`${this.apiUrl}api/v1/movies/${movieId}/slices/${sliceId}/claim`, null)
+      .subscribe((result) => {
+        console.log(result);
+      });
+  }
 }

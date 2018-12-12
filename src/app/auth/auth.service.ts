@@ -32,22 +32,8 @@ export class AuthService {
     return this.user;
   }
 
-  private getUserById(userId: string) {
-    this.http.get<{ message: string, user: any }>(`${this.apiUrl}api/v1/users/` + userId)
-      .pipe(map((data) => {
-        return {
-          message: data.message,
-          user: {
-            id: data.user._id,
-            email: data.user.email,
-            firstName: data.user.firstName,
-            lastName: data.user.lastName
-          }
-        };
-      }))
-      .subscribe(response => {
-        this.user = response.user;
-      });
+  getUserById(userId: string) {
+    return this.http.get<{ message: string, user: any }>(`${this.apiUrl}api/v1/users/` + userId);
   }
 
   getAuthStatusListener() {
@@ -114,7 +100,21 @@ export class AuthService {
     if (expiresIn > 0) {
       this.token = authInformation.token;
       this.isAuthenticated = true;
-      this.getUserById(authInformation.userId);
+      this.getUserById(authInformation.userId)
+        .pipe(map((data) => {
+          return {
+            message: data.message,
+            user: {
+              id: data.user._id,
+              email: data.user.email,
+              firstName: data.user.firstName,
+              lastName: data.user.lastName
+            }
+          };
+        }))
+        .subscribe(response => {
+          this.user = response.user;
+        });
       this.setAuthTimer(expiresIn / 1000);
       this.authStatusListener.next(true);
     }
