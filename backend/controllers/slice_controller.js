@@ -18,10 +18,10 @@ module.exports = {
             const movie = result[0];
             const user = result[1];
             const slice = movie.slices.id(req.params.sliceId);
-            if (slice == null) return res.status(404).json({ message: `Slice with id: ${req.params.sliceId} not found.` });
+            if (slice == null) return res.status(404).json({ error: `Slice with id: ${req.params.sliceId} not found.` });
 
             // Check if slice is claimed
-            if (slice.claimant != null) return res.status(400).json({ message: `Slice is already claimed by ${slice.claimant} .` });
+            if (slice.claimant != null) return res.status(400).json({ error: `Slice is already claimed by ${slice.claimant} .` });
 
             slice.claimant = user._id;
 

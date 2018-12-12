@@ -19,11 +19,11 @@ module.exports = {
                     }
                 } else {
                     // Invalid password
-                    return res.status(401).json({ message: 'Unauthorized.' });
+                    return res.status(401).json({ error: 'Invalid login credentials.' });
                 }
             })
             .catch(() => {
-                return res.status(404).json({ error: 'User not found' });
+                return res.status(404).json({ error: `User with email '${req.body.email}' not found` });
             });
     },
 
@@ -55,7 +55,7 @@ module.exports = {
                     res.status(201).json({ message: 'User created.', result: savedUser });
                 }).catch(next);
             } else {
-                res.status(400).json({ error: `Email: ${req.body.email} is already taken.` });
+                res.status(400).json({ error: `The email '${req.body.email}' is already taken.` });
             }
         });
     },

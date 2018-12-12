@@ -1,30 +1,30 @@
 <mat-card>
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
-      <mat-form-field>
-        <input matInput type="email" name="email" ngModel placeholder="E-Mail" #emailInput="ngModel" required email/>
-        <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
-      </mat-form-field>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+      <input matInput type="email" name="email" ngModel placeholder="E-Mail" #emailInput="ngModel" required email/>
+      <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
+    </mat-form-field>
 
-      <mat-form-field>
-        <input matInput type="password" name="password" ngModel placeholder="Password" #passwordInput="ngModel" required>
-        <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
-      </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" name="password" ngModel placeholder="Password" #passwordInput="ngModel" required>
+      <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
+    </mat-form-field>
 
-      <table class="name-table" cellpadding="0"><tr>
-          <td><mat-form-field>
-            <input matInput type="text" name="firstName" ngModel placeholder="First name" #firstNameInput="ngModel" required/>
-            <mat-error *ngIf="firstNameInput.invalid">First name is required.</mat-error>
-          </mat-form-field></td>
+    <table class="name-table" cellpadding="0"><tr>
+        <td><mat-form-field>
+          <input matInput type="text" name="firstName" ngModel placeholder="First name" #firstNameInput="ngModel" required/>
+          <mat-error *ngIf="firstNameInput.invalid">First name is required.</mat-error>
+        </mat-form-field></td>
 
-          <td><mat-form-field>
-            <input matInput type="text" name="lastName" ngModel placeholder="Last name" #lastNameInput="ngModel" required/>
-            <mat-error *ngIf="lastNameInput.invalid">Last name is required.</mat-error>
-          </mat-form-field></td>
-        </tr></table>
+        <td><mat-form-field>
+          <input matInput type="text" name="lastName" ngModel placeholder="Last name" #lastNameInput="ngModel" required/>
+          <mat-error *ngIf="lastNameInput.invalid">Last name is required.</mat-error>
+        </mat-form-field></td>
+      </tr></table>
 
-      <button mat-raised-button color="primary" type="submit" *ngIf="!isLoading">
-        Signup
-      </button>
-    </form>
-  </mat-card>
+    <button mat-raised-button color="primary" type="submit" *ngIf="!isLoading">
+      Signup
+    </button>
+  </form>
+</mat-card>

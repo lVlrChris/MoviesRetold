@@ -1,24 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Movie } from '../movie.model';
 import { MovieService } from '../movie.service';
 import { durationValidator } from './duration.validator';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-movie-create',
   templateUrl: './movie-create.component.html',
   styleUrls: ['./movie-create.component.sass']
 })
-export class MovieCreateComponent implements OnInit {
+export class MovieCreateComponent implements OnInit, OnDestroy {
   mode = 'create';
   private movieId: String;
   movie: Movie;
   isLoading = false;
   form: FormGroup;
+  private authStatusSub: Subscription;
 
-  constructor(private movieService: MovieService, public route: ActivatedRoute) { }
+  constructor(private movieService: MovieService, public route: ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit() {
     // Form validation setup
@@ -28,6 +31,11 @@ export class MovieCreateComponent implements OnInit {
       }),
       description: new FormControl(null)
     });
+
+    this.authStatusSub = this.authService.getAuthStatusListener()
+      .subscribe(authStatus => {
+        this.isLoading = false;
+      });
 
     // Get existing movie for editing
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -99,5 +107,9 @@ export class MovieCreateComponent implements OnInit {
 
       this.movieService.updateMovie(this.movieId, movie);
     }
+  }
+
+  ngOnDestroy() {
+    this.authStatusSub.unsubscribe();
   }
 }

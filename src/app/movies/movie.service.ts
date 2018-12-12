@@ -42,7 +42,6 @@ export class MovieService {
       }))
       .subscribe((response) => {
         this.movies = response.movies;
-        console.log(this.movies);
         this.moviesUpdated.next({ movies: [...this.movies], movieCount: response.maxMovies });
       });
   }

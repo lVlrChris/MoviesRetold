@@ -4,7 +4,7 @@ module.exports = function(app) {
 
         // Check for auth errors
         if (err.name === 'UnauthorizedError') {
-            return res.status(401).json({ message: 'Invalid Token' });
+            return res.status(401).json({ error: 'Invalid Token' });
         }
 
         // All other errors

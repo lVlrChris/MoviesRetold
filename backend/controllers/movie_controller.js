@@ -1,5 +1,4 @@
 const { Movie, validate, validateUpdate } = require('../models/movie');
-const { User } = require('../models/user');
 
 module.exports = {
     getAll(req, res, next) {
@@ -76,9 +75,8 @@ module.exports = {
                         movie: updated
                     });
                 }).catch(next);
-            }).catch((err) => {
-                console.log(err);
-                res.status(404).json({ message: `Movie with id: ${req.params.movieId} or creator: ${req.userData.userId} not found/authorized` });
+            }).catch(() => {
+                res.status(404).json({ error: `Movie with id: ${req.params.movieId} or creator: ${req.userData.userId} not found/authorized` });
             });
     },
 
@@ -92,7 +90,7 @@ module.exports = {
                         res.send({ message: `Movie with id: ${req.params.movieId} deleted` });
                     }).catch(next);
             }).catch(() => {
-                res.status(404).json({ message: `Movie with id: ${req.params.movieId} or creator: ${req.userData.userId} not found/authorized` });
+                res.status(404).json({ error: `Movie with id: ${req.params.movieId} or creator: ${req.userData.userId} not found/authorized` });
             });
     }
 };

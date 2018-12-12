@@ -65,6 +65,8 @@ export class MovieListComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.movieService.deleteMovie(movieId).subscribe(() => {
         this.movieService.getMovies(this.moviesPerPage, this.currentPage);
+      }, () => {
+        this.isLoading = false;
       });
   }
 
