@@ -1,11 +1,17 @@
 const { Movie } = require('../models/movie');
 const { User } = require('../models/user');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 
 module.exports = {
     claim(req, res, next) {
+        // Get userId from token
+        const token = req.headers.authorization.split(' ')[1];
+        const userId = jwt.verify(token, config.secret).userId;
+
         // Find the movie and user
         const moviePromise = Movie.findById(req.movieId).exec();
-        const userPromise = User.findById(req.user.sub).exec();
+        const userPromise = User.findById(userId).exec();
 
         // Set slice claimant
         Promise.all([moviePromise, userPromise]).then((result) => {
@@ -27,9 +33,13 @@ module.exports = {
     },
 
     unclaim(req, res, next) {
+        // Get userId from token
+        const token = req.headers.authorization.split(' ')[1];
+        const userId = jwt.verify(token, config.secret).userId;
+
         // Find the movie and user
         const moviePromise = Movie.findById(req.movieId).exec();
-        const userPromise = User.findById(req.user.sub).exec();
+        const userPromise = User.findById(userId).exec();
 
         // Find slice
         Promise.all([moviePromise, userPromise]).then((result) => {

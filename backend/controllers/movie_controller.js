@@ -18,7 +18,7 @@ module.exports = {
 
         movieQuery.then((result) => {
             fetchedMovies = result;
-            return Movie.count();
+            return Movie.countDocuments();
         }).then((count) => {
             res.status(200).json({
                 message: 'Movies fetched successfully',
