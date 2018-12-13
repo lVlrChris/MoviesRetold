@@ -75,7 +75,10 @@ export class MovieDetailsComponent implements OnInit {
       });
     });
 
+    console.log(this.authService.getUser());
+
     this.userIsAuth = this.authService.getIsAuth();
+    // this.userId = this.authService.getUser().id;
     this.authStatusSub = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
         this.userIsAuth = isAuthenticated;
