@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "set NODE_ENV=production&& node ./backend/server.js",
-    "start:test": "set NODE_ENV=tes&& nodemon ./backend/server.js",
+    "start:test": "set NODE_ENV=test&& nodemon ./backend/server.js",
     "start:local": "set NODE_ENV=local&& nodemon ./backend/server.js",
     "debug:express": "set DEBUG=express:* & node ./backend/server.js",
     "build": "ng build",
