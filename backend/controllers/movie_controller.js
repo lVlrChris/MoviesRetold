@@ -33,7 +33,9 @@ module.exports = {
     getById(req, res, next) {
         Movie.findById(req.params.movieId).then((result) => {
             res.send(result);
-        }).catch(next);
+        }).catch((error) => {
+            res.status(404).json({ error: `Unable to find Movie with id: ${req.params.movieId}.`})
+        });
     },
 
     create(req, res, next) {

@@ -351,8 +351,8 @@ describe('/api/v1/movies', () => {
                     .end((err, res) => {
                         movieId = res.body.movie._id;
                         if(res.status === 201) done();
-                    })
-            })
+                    });
+            });
 
             //Getbyid valid request
             it('should respond with status 200 for a valid request', (done) => {
@@ -362,14 +362,109 @@ describe('/api/v1/movies', () => {
                     .end((err, res) => {
                         assert.equal(res.status, 200);
                         done();
-                    })
-            })
-
-            
-            
-            //Getbyid unauthorized request
+                    });
+            });
     
             //Getbyid invalid id
+            it('should respond with status 404 for an invalid id', (done) => {
+                request(app)
+                .get('/api/v1/movies/' + '12345')
+                .set('Authorization', 'Bearer ' + apiKey)
+                .end((err, res) => {
+                    assert.equal(res.status, 404);
+                    done();
+                });
+            });
         });
     });
+
+    describe('PUT', () => {
+        //Create movie to change
+        let movieId;
+        beforeEach((done) => {
+            //Create user
+            request(app)
+                .post('/api/v1/users')
+                .send({
+                    email: testEmail,
+                    password: testPW,
+                    firstName: "Test",
+                    lastName: "Tester"
+                })
+                .end((err, res) => {
+                    if (res.status !== 201) return;
+                    //Authenticate test user
+                    request(app)
+                        .post('/api/v1/users/authenticate')
+                        .send({
+                            email: testEmail,
+                            password: testPW
+                        })
+                        .end((err, res) => {
+                            if (res.status !== 200) return;
+                            apiKey = res.body.token;
+                            request(app)
+                                .post('/api/v1/movies')
+                                .set('Authorization', 'Bearer ' + apiKey)
+                                .send({
+                                    title: "Test Title",
+                                    description: "Test description",
+                                    duration: 11,
+                                    sliceDuration: 2
+                                })
+                                .end((err, res) => {
+                                    movieId = res.body.movie._id;
+                                    done();
+                                });
+                        });
+
+                });
+        });
+
+        //Update valid request
+        it('should respond with status 200 for a valid request', (done) => {
+            request(app)
+                .put('/api/v1/movies/' + movieId)
+                .set('Authorization', 'Bearer ' + apiKey)
+                .send({
+                    title: "Test Title123",
+                    description: "Test description123"
+                })
+                .end((err, res) => {
+                    assert.equal(res.status, 200);
+                    done();
+                });
+        });
+
+        it('should update the Movie for a valid response', (done) => {
+            const updateTitle = 'Test Title123';
+            const updateDesc = 'Test description123';
+            request(app)
+                .put('/api/v1/movies/' + movieId)
+                .set('Authorization', 'Bearer ' + apiKey)
+                .send({
+                    title: updateTitle,
+                    description: updateDesc
+                })
+                .end((err, res) => {
+                    Movie.findById(movieId).then((result) => {
+                        assert.equal(result.title, updateTitle);
+                        assert.equal(result.description, updateDesc);
+                        done();
+                    })
+                });
+        })
+
+        //Update invalid id
+        //Update unauthorized request
+        //Update invalid creator
+        //Update invalid fields 
+    });
+
+    describe('DELETE', () => {
+        //Delete valid request
+        //Delete invalid id
+        //Delete unauthorized request
+        //Delete invalid creator
+    })
 });
