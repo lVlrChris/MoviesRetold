@@ -8,7 +8,7 @@
     "start:local": "set NODE_ENV=local&& nodemon ./backend/server.js",
     "debug:express": "set DEBUG=express:* & node ./backend/server.js",
     "build": "ng build",
-    "test": "mocha backend/test",
+    "test": "mocha backend/test -R TAP",
     "test:backend": "set NODE_ENV=test&& nodemon --exec mocha backend/test",
     "test:travis": "mocha backend/test",
     "lint": "ng lint",
