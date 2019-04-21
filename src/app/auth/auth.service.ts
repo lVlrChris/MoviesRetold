@@ -53,6 +53,7 @@ export class AuthService {
 
   loginUser(email: string, password: string) {
     const authData: AuthData = { email: email, password: password, firstName: undefined, lastName: undefined };
+
     this.http.post<{ message: string, token: string, expiresIn: number, user: any }>(
       `${this.apiUrl}api/v1/users/authenticate`, authData
       )
@@ -80,7 +81,6 @@ export class AuthService {
           const now = new Date();
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
           this.saveAuthData(this.token, expirationDate, this.user.id);
-          // this.router.navigate(['/']);
         }
       }, error => {
         this.authStatusListener.next(false);
@@ -131,7 +131,6 @@ export class AuthService {
   }
 
   private setAuthTimer(duration: number) {
-    console.log('Setting timer: ' + duration);
     this.tokenTimer = setTimeout(() => {
       this.logout();
     }, duration * 1000);

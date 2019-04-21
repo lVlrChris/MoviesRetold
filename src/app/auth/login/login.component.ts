@@ -19,9 +19,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authStatusSub = this.authService.getAuthStatusListener()
       .subscribe(authStatus => {
+        if(authStatus) {
+          this.router.navigateByUrl(this.returnUrl);
+        }
         this.isLoading = false;
       });
-
+    
     // Get previous route info
     this.route.queryParams.subscribe(params => this.returnUrl = params['return'] || '/');
   }
@@ -32,8 +35,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     } else {
       this.isLoading = true;
       this.authService.loginUser(form.value.email, form.value.password);
-      console.log(this.returnUrl);
-      this.router.navigateByUrl(this.returnUrl);
     }
   }
 
