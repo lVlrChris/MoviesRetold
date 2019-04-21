@@ -6,6 +6,7 @@ module.exports = {
         // Gather pagination vars
         const pageSize = +req.query.pagesize;
         const currentPage = +req.query.page;
+        const sorting = +req.query.sort || 1;
         const movieQuery = Movie.find();
         let fetchedMovies;
 
@@ -13,7 +14,8 @@ module.exports = {
         if (pageSize && currentPage) {
             movieQuery
                 .skip(pageSize * (currentPage - 1))
-                .limit(pageSize);
+                .limit(pageSize)
+                .sort({ title: sorting });
         }
 
         movieQuery.then((result) => {
@@ -37,7 +39,7 @@ module.exports = {
     create(req, res, next) {
         // Validate input
         const { error } = validate(req.body);
-        if (error) return res.status(400).send(error.details[0].message);
+        if (error) return res.status(403).send(error.details[0].message);
 
         const movie = new Movie({
             title: req.body.title,
@@ -53,7 +55,9 @@ module.exports = {
                 message: 'Movie created successfully',
                 movie: savedMovie
             });
-        }).catch(next);
+        }).catch((error) => {
+            res.status(403).json({ error: `Movie with title: ${req.body.title} already exists.`});
+        });
     },
 
     update(req, res, next) {
