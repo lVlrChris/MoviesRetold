@@ -7,6 +7,7 @@ module.exports = {
     authenticate(req, res, next) {
         User.findOne({ email: req.body.email })
             .then((result) => {
+                if (!req.body.password) return res.status(403).json({ error: 'No email given.'});
                 if (bcrypt.compareSync(req.body.password, result.hash)) {
                     // Valid password
                     try {
@@ -68,15 +69,18 @@ module.exports = {
     },
 
     getById(req, res, next) {
+        if (!req.params.userId) return res.status(403).json({ error: 'No userId given'});
         User.findById(req.params.userId).select('-hash').then((result) => {
             res.status(200).json({ message: 'User fetched successfully', user: result });
-        }).catch(next);
+        }).catch((err) => {
+            res.status(404).json({ error: `No user with id: ${req.params.userId} found.`});
+        });
     },
 
     update(req, res, next) {
         // Validate input
         const { error } = validate(req.body);
-        if (error) return res.status(400).send(error.details[0].message);
+        if (error) return res.status(403).send(error.details[0].message);
 
         // Check for old user
         User.findById(req.params.userId).then((oldUser) => {
@@ -84,31 +88,32 @@ module.exports = {
 
             // Check for new user
             User.findOne({ email: req.body.email }).then((newUser) => {
-                if (newUser == null) {
-                    // New user doesn't exit yet
-                    if (oldUser.email !== req.body.email) {
-                        // Check if a new password is given
-                        if (req.body.password) {
-                            oldUser.password = bcrypt.hashSync(req.body.password, 10);
-                        }
-
-                        // Set new values to user
-                        oldUser.email = req.body.email;
-                        oldUser.firstName = req.body.firstName;
-                        oldUser.lastName = req.body.lastName;
-
-                        // Save and respond
-                        oldUser.save().then(() => {
-                            // TODO: Omit hash
-                            res.send(oldUser);
-                        }).catch(next);
+                if (newUser == null || newUser.email === req.body.email) {
+                    // Check if a new password is given
+                    if (req.body.password) {
+                        oldUser.password = bcrypt.hashSync(req.body.password, 10);
+                    } else {
+                        return res.status(403).json({ error: 'No password provided.' });
                     }
+
+                    // Set new values to user
+                    oldUser.email = req.body.email;
+                    oldUser.firstName = req.body.firstName;
+                    oldUser.lastName = req.body.lastName;
+
+                    // Save and respond
+                    oldUser.save().then(() => {
+                        // TODO: Omit hash
+                        res.send(oldUser);
+                    }).catch(next);
                 } else {
                     // New user already exists
                     res.status(400).json({ error: `Email ${req.body.email} is already taken.` });
                 }
-            }).catch(next);
-        }).catch(next);
+            }).catch(next);    
+        }).catch((err) => {
+            res.status(404).json({ error: `User with id: ${req.params.userId} was not found.`});
+        });
     },
 
     delete(req, res, next) {
@@ -116,6 +121,8 @@ module.exports = {
             .then(() => {
                 res.json({ message: 'User deleted.' });
             })
-            .catch(next);
+            .catch((error) => {
+                res.status(404).json({ error: `User with id: ${req.params.userId} was not found.`});
+            });
     }
 };
