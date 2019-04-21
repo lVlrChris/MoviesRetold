@@ -10,6 +10,7 @@
     "build": "ng build",
     "test": "ng test",
     "test:backend": "set NODE_ENV=test&& nodemon --exec mocha backend/test",
+    "test:travis": "mocha backend/test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ng build --prod --output-path dist"
