@@ -43,7 +43,7 @@ export class AuthService {
   createUser(email: string, password: string, firstName: string, lastName: string) {
     const authData: AuthData = { email: email, password: password, firstName: firstName, lastName: lastName };
 
-    return this.http.post(`${this.apiUrl}api/v1/users/register`, authData)
+    return this.http.post(`${this.apiUrl}api/v1/users`, authData)
       .subscribe(() => {
         this.router.navigate(['/']);
       }, error => {
